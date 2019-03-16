@@ -65,7 +65,7 @@ void scalar2DFunction::printLastString()
 {
 	for (int x = 0; x < table.size(); x++)
 	{
-		std::cout << table[x].back() << '\t';
+		std::cout << table[x].back() << '\n';
 	}
 	std::cout << '\n';
 }

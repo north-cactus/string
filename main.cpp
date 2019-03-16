@@ -72,12 +72,12 @@ int main(int argc, char* argv[])
 	for (int i = 0; i < quantityOfSteps; i++)
 	{
 		func.simpleNextMoment(c);
-		/*if (i % outCoef == 0)
+		if (i % outCoef == 0)
 		{
-			cout << i << '\t'; 
 			func.printLastString();
-		}*/
+			cout << '\n';
+		}
 	}
-	func.printTableWithNumbers();
+	//func.printTableWithNumbers();
 	return 0;
 }
