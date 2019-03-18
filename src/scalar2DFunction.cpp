@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "scalarFunction.h"
+#include "scalar2DFunction.h"
 #include <math.h>
 
 scalar2DFunction::scalar2DFunction()

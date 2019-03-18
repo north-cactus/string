@@ -2,7 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <boost/program_options.hpp>
-#include "scalarFunction.h"
+#include "scalar2DFunction.h"
 
 namespace po = boost::program_options;
 
@@ -66,9 +66,9 @@ int main(int argc, char* argv[])
 	/*int t;
 	std::cout << "t = ";
 	std::cin >> t;*/
-	std::cout 	<< "outCoef = " << outCoef << '\n' 
+	std::cout 	<< "outCoef = " << outCoef << '\n'
 			<< "quantity of steps = " << quantityOfSteps << '\n'
-			<< "c = " << c << std::endl; 	
+			<< "c = " << c << std::endl;
 	for (int i = 0; i < quantityOfSteps; i++)
 	{
 		func.simpleNextMoment(c);
