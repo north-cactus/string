@@ -3,6 +3,7 @@
 #include <vector>
 #include <boost/program_options.hpp>
 #include "scalar2DFunction.h"
+#include "EulerString.h"
 
 namespace po = boost::program_options;
 
@@ -38,7 +39,7 @@ int main(int argc, char* argv[])
 	}
 	int n, m;
 	float c;
-	scalar2DFunction func;
+	EulerString func;
 	std::cout << "Maxes: ";
 	func.readMaxes();
 	std::cout << "coefficient C (sound velocity):";

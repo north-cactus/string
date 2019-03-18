@@ -184,20 +184,4 @@ float scalar2DFunction::xderivative(int x, int t)
 {
 	return xderivative(x, t, 1);
 }
-void scalar2DFunction::simpleNextMoment(float c)
-{
-	vector<float> emptyVector; // Это нужно переписать
-	int t = table[0].size();
-	if (t < 1)
-	{
-		cerr << "Error in function simpleNextMoment.\n Starting conditions have not be set. (t < 1)\n";
-		return;
-	}
-	for (int x = 0; x < table.size(); x++)
-	{
-		table[x].push_back(
-							c*xderivative(x, t - 1, 2)*tstep()*tstep()
-							+ tderivative(x, t - 1)*tstep()
-							+ table[x][t - 1]);
-	}
-}
+
