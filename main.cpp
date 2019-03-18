@@ -3,6 +3,7 @@
 #include <vector>
 #include <boost/program_options.hpp>
 #include "scalar2DFunction.h"
+#include "EulerString.h"
 
 namespace po = boost::program_options;
 
@@ -32,13 +33,12 @@ int main(int argc, char* argv[])
 	}
 	if (vm.count("out"))
 	{
-		//std::cout << vm["out"].as<std::string>() << std::endl;
 		std::cout << "Sorry, file output have not realized.\n";
 		return 1;
 	}
 	int n, m;
 	float c;
-	scalar2DFunction func;
+	EulerString func;
 	std::cout << "Maxes: ";
 	func.readMaxes();
 	std::cout << "coefficient C (sound velocity):";
@@ -51,33 +51,17 @@ int main(int argc, char* argv[])
 	std::cout << "size of table (n, m): ";
 	std::cin >> n >> m;
 	func.readTable(n, m);
-	/*//differentiation
-	std::cout << "d: ";
-	int d;
-	std::cin >> d;
-	std::cout << "derivative: ";
-	for (int i = 0; i < func.getTable().size(); i++)
-	{
-		std::cout << i << '\t' << func.getTable()[i][0] << '\t' << func.xderivative(i, 0, d) << '\n';
-	}*/
-	//func.printMaxes();
-	//std::cout << endl;
-	//func.printTable();
-	/*int t;
-	std::cout << "t = ";
-	std::cin >> t;*/
 	std::cout 	<< "outCoef = " << outCoef << '\n'
 			<< "quantity of steps = " << quantityOfSteps << '\n'
 			<< "c = " << c << std::endl;
 	for (int i = 0; i < quantityOfSteps; i++)
 	{
-		func.simpleNextMoment(c);
+		func.NextMoment(c);
 		if (i % outCoef == 0)
 		{
 			func.printLastString();
 			cout << '\n';
 		}
 	}
-	//func.printTableWithNumbers();
 	return 0;
 }

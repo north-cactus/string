@@ -10,11 +10,11 @@ class scalar2DFunction
 		scalar2DFunction();
 		virtual ~scalar2DFunction();
 		vector<vector<float>> getTable ();
-	vector<float> getLastString ();
+		vector<float> getLastString ();
 		void readTable(int quantityOfXVal, int quantityOfTVal);
 		void printTable();
 		void printTableWithNumbers();
-	void printLastString();
+		void printLastString();
 		void readMaxes();
 		void printMaxes();
 		float gettmax();
@@ -29,7 +29,6 @@ class scalar2DFunction
 		float xderivative (int x, int t);
 		float tderivative (int x, int t, int n); //n is the degree of derivative
 		float xderivative (int x, int t, int n);
-		void simpleNextMoment(float c);
 	protected:
 		vector<vector<float>> table;
 		float xmin, xmax, tmin, tmax;
