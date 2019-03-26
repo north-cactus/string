@@ -1,4 +1,3 @@
-# string
-physical model of string
+## string
+# physical model of string
 
-=)
