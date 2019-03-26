@@ -4,6 +4,7 @@
 #include <boost/program_options.hpp>
 #include "scalar2DFunction.h"
 #include "EulerString.h"
+#include "phase.h"
 
 namespace po = boost::program_options;
 
@@ -39,7 +40,34 @@ int main(int argc, char* argv[])
 	}
 	if (vm.count("analytical-solution"))
 	{
-		std::cout << "You have seted analytical-solution option.\n";
+		int m;
+		std::cout << "Quantity of mode of oscillation: ";
+		std::cin >> m;
+		vector<phase> phases;
+		for (int i = 0; i < m; i++)
+		{
+			float a, b;
+			std::cin >> a >> b;
+			phase tmp(a, b);
+			phases.push_back(tmp);
+		}
+		float t, x;
+		std::cout << "t: ";
+		std::cin >> t;
+		std::cout << "x: ";
+		std::cin >> x;
+		
+		std::cout << "phases[0].calculate(t, x) = " << phases[0].calculate(t, x) << '\n';
+
+		if (phases.size() >= 2) 
+		{
+			phase tmp = phases[0] - phases[1];
+			std::cout << "(phases[0] - phases[1]).calculate(t, x) = " << tmp.calculate(t, x) << '\n';
+		}
+		float coef;
+		std::cin >> coef;
+		phase tmp = phases[0] * coef;
+		std::cout << "phases[0]*coef.calculate(t, x) = " << tmp.calculate(t, x) << '\n';
 		return 0;
 	}
 	int n, m;
