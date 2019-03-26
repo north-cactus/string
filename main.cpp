@@ -13,6 +13,7 @@ int main(int argc, char* argv[])
 	desc.add_options()
 	("help,h", "Show this help")
 	("out,o", po::value<std::string>(), "Output file option. It requires one argument.")
+	("analytical-solution,a", "Amplitudes of natural frequencies will be calculated by initial state of string.\n Result will be calculated with analytical solution.")
 	;
 	po::variables_map vm;
 	try
@@ -35,6 +36,11 @@ int main(int argc, char* argv[])
 	{
 		std::cout << "Sorry, file output have not realized.\n";
 		return 1;
+	}
+	if (vm.count("analytical-solution"))
+	{
+		std::cout << "You have seted analytical-solution option.\n";
+		return 0;
 	}
 	int n, m;
 	float c;
