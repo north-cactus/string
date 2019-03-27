@@ -12,10 +12,11 @@ class trigonometricMonom
 		const trigonometricMonom operator+();
 		const trigonometricMonom operator-();
 		friend const trigonometricMonom operator*(const trigonometricMonom left, const trigonometricMonom right);
-		friend const trigonometricMonom operator/(const trigonometricMonom left, const trigonometricMonom right);
 		friend const trigonometricMonom operator*(const trigonometricMonom left, const std::complex<float> right);
 		friend const trigonometricMonom operator*(const std::complex<float> left, const trigonometricMonom right);
 		friend const trigonometricMonom operator/(const trigonometricMonom left, const trigonometricMonom right);
+		friend const trigonometricMonom operator/(const trigonometricMonom left, const std::complex<float> right);
+		friend const trigonometricMonom operator/(const std::complex<float> left, const trigonometricMonom right);
 		void print();
 
 	protected:

@@ -9,6 +9,8 @@ class phase
 		phase(float init_omeg, float init_k);
 		virtual ~phase();
 		float calculate(float t, float x);
+		const phase operator+() const;
+		const phase operator-() const;
 		friend const phase operator+(const phase left, const phase right);
 		friend const phase operator-(const phase left, const phase right);
 		friend const phase operator*(const phase ph, const float coef);

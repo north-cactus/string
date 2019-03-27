@@ -15,12 +15,18 @@ phase::~phase()
 {
     //dtor
 }
-
 float phase::calculate(float t, float x)
 {
 	return omega*t + k*x;
 }
-
+const phase phase::operator+() const
+{
+	return *this;
+}
+const phase phase::operator-() const
+{
+	return phase(-omega, -k);
+}
 const phase operator+(const phase left, const phase right)
 {
 	return phase(left.omega + right.omega, left.k + right.k);

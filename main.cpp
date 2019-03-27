@@ -50,14 +50,14 @@ int main(int argc, char* argv[])
 		complex<float> coef(recoef, imcoef);
 		trigonometricMonom tmp(coef, phase(a, b)), minus, plus;
 		tmp.print();
-		std::cout << std::endl << "0.2 *tmp = ";
-		minus = 0.2 * tmp;
+		std::cout << std::endl << "0.2/tmp = ";
+		minus = 0.2 / tmp;
 		(minus).print();
-		std::cout << std::endl << "tmp * 5 = ";
-		plus = tmp * 5;
+		std::cout << std::endl << "tmp/5 = ";
+		plus = tmp / 5;
 		(plus).print();
-		std::cout << std::endl << "tmp^2 = ";
-		tmp = plus * minus;
+		std::cout << std::endl << "tmp^(-2) = ";
+		tmp = minus/plus ;
 		tmp.print();
 		std::cout << '\n';
 		
