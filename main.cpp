@@ -1,11 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <complex>
 #include <boost/program_options.hpp>
 #include "scalar2DFunction.h"
 #include "EulerString.h"
 #include "phase.h"
 #include "trigonometricMonom.h"
+#include "trigonometricPolynomial.h"
 
 namespace po = boost::program_options;
 
@@ -41,25 +43,19 @@ int main(int argc, char* argv[])
 	}
 	if (vm.count("analytical-solution"))
 	{
-		//int m;
-		//std::cout << "Quantity of mode of oscillation: ";
-		//std::cin >> m;
-		
-		float a, b, imcoef, recoef;
-		std::cin >> recoef >> imcoef >> a >> b;
-		complex<float> coef(recoef, imcoef);
-		trigonometricMonom tmp(coef, phase(a, b)), minus, plus;
-		tmp.print();
-		std::cout << std::endl << "0.2/tmp = ";
-		minus = 0.2 / tmp;
-		(minus).print();
-		std::cout << std::endl << "tmp/5 = ";
-		plus = tmp / 5;
-		(plus).print();
-		std::cout << std::endl << "tmp^(-2) = ";
-		tmp = minus/plus ;
-		tmp.print();
-		std::cout << '\n' << "tmp.calculate(1, 1) = " << tmp.calculate(1, 1) << '\n';
+		int m;
+		std::cout << "Quantity of mode of oscillation: ";
+		std::cin >> m;
+
+		trigonometricPolynomial P;
+
+		for (int i = 0; i < m; i++)
+		{
+			float im, re, k, omega;	
+			std::cin >> re >> im >> k >> omega;
+			P.addTerm(trigonometricMonom(std::complex<float>(re, im), phase(omega, k)));
+		}
+		cout << "P(0, 0) = " << P.calculate(0, 0) << std::endl;
 		
 		return 0;
 	}

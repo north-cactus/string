@@ -10,8 +10,8 @@ class trigonometricMonom
 		trigonometricMonom(std::complex<float> coef, phase phs);
 		virtual ~trigonometricMonom();
 		std::complex<float> calculate(float t, float x);
-		const trigonometricMonom operator+();
-		const trigonometricMonom operator-();
+		const trigonometricMonom operator+() const;
+		const trigonometricMonom operator-() const;
 		friend const trigonometricMonom operator*(const trigonometricMonom left, const trigonometricMonom right);
 		friend const trigonometricMonom operator*(const trigonometricMonom left, const std::complex<float> right);
 		friend const trigonometricMonom operator*(const std::complex<float> left, const trigonometricMonom right);

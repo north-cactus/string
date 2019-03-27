@@ -19,11 +19,11 @@ std::complex<float> trigonometricMonom::calculate(float t, float x)
 {
 	return coef * exp(std::complex<float>(0, 1) * phs.calculate(t, x));
 }
-const trigonometricMonom trigonometricMonom::operator+()
+const trigonometricMonom trigonometricMonom::operator+() const
 {
 	return *this;
 }
-const trigonometricMonom trigonometricMonom::operator-()
+const trigonometricMonom trigonometricMonom::operator-() const
 {
 	return trigonometricMonom(-coef, phs);
 }
