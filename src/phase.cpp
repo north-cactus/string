@@ -37,3 +37,12 @@ const phase operator*(const float coef, const phase ph)
 {
 	return phase(ph.omega*coef, ph.k*coef);
 }
+
+float phase::getOmega()
+{
+	return omega;
+}
+float phase::getK()
+{
+	return k;
+}
