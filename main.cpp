@@ -45,19 +45,21 @@ int main(int argc, char* argv[])
 		//std::cout << "Quantity of mode of oscillation: ";
 		//std::cin >> m;
 		
-		complex<float> coef;
 		float a, b, imcoef, recoef;
 		std::cin >> recoef >> imcoef >> a >> b;
+		complex<float> coef(recoef, imcoef);
 		trigonometricMonom tmp(coef, phase(a, b)), minus, plus;
 		tmp.print();
-		std::cout << std::endl << "-tmp = ";
-		minus = -tmp;
+		std::cout << std::endl << "0.2 *tmp = ";
+		minus = 0.2 * tmp;
 		(minus).print();
-		std::cout << std::endl << "+tmp = ";
-		plus = +tmp;
+		std::cout << std::endl << "tmp * 5 = ";
+		plus = tmp * 5;
 		(plus).print();
-		std::cout << std::endl;
-
+		std::cout << std::endl << "tmp^2 = ";
+		tmp = plus * minus;
+		tmp.print();
+		std::cout << '\n';
 		
 		return 0;
 	}
