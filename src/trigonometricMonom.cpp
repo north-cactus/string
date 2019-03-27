@@ -6,18 +6,19 @@ trigonometricMonom::trigonometricMonom()
 {
     //ctor
 }
-
-trigonometricMonom::~trigonometricMonom()
-{
-    //dtor
-}
-
 trigonometricMonom::trigonometricMonom(std::complex<float> Coefficent, phase Phase)
 {
 	coef = Coefficent;
 	phs = Phase;
 }
-
+trigonometricMonom::~trigonometricMonom()
+{
+    //dtor
+}
+std::complex<float> trigonometricMonom::calculate(float t, float x)
+{
+	return coef * exp(std::complex<float>(0, 1) * phs.calculate(t, x));
+}
 const trigonometricMonom trigonometricMonom::operator+()
 {
 	return *this;

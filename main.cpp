@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
 		std::cout << std::endl << "tmp^(-2) = ";
 		tmp = minus/plus ;
 		tmp.print();
-		std::cout << '\n';
+		std::cout << '\n' << "tmp.calculate(1, 1) = " << tmp.calculate(1, 1) << '\n';
 		
 		return 0;
 	}
