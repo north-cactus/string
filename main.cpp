@@ -11,6 +11,8 @@
 
 namespace po = boost::program_options;
 
+const float pi = 3.1415926;
+
 int main(int argc, char* argv[])
 {
 	po::options_description desc("Short description of options");
@@ -43,20 +45,33 @@ int main(int argc, char* argv[])
 	}
 	if (vm.count("analytical-solution"))
 	{
-		int m;
+		int m; 
+		float length, tmax, lstep, tstep, soundVelocity;
+		std::cout << "length, tmax, lstep, tstep, soundVelocity: ";
+		std::cin >> length >> tmax >> lstep >> tstep >> soundVelocity;
 		std::cout << "Quantity of mode of oscillation: ";
 		std::cin >> m;
 
-		trigonometricPolynomial P;
+		float fundamOmega = 4 * pi * soundVelocity / length;
+		float fundamK = 4 * pi / length;
 
-		for (int i = 0; i < m; i++)
+		trigonometricPolynomial P;
+		float cosCoef, sinCoef;	
+
+		for (int i = 1; i <= m; i++)
 		{
-			float im, re, k, omega;	
-			std::cin >> re >> im >> k >> omega;
-			P.addTerm(trigonometricMonom(std::complex<float>(re, im), phase(omega, k)));
+			std::cin >> sinCoef >> cosCoef; 
+			P.addTerm(trigonometricMonom(std::complex<float>(cosCoef / 2, -sinCoef / 2), phase(fundamOmega / i, fundamK / i)));
+			P.addTerm(trigonometricMonom(std::complex<float>(cosCoef / 2, sinCoef / 2), -phase(fundamOmega / i, fundamK / i)));
 		}
-		cout << "P(0, 0) = " << P.calculate(0, 0) << std::endl;
-		
+		for (float t = 0; t < tmax; t += tstep)
+		{
+			for (float l = 0; l < length; l += lstep) 
+			{
+				cout << l << '\t' << P.calculate(t, l).real() << '\t' << P.calculate(t, l).imag() << '\n';
+			}
+			cout << '\n';
+		}
 		return 0;
 	}
 	int n, m;
