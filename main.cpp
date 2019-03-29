@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
 		{
 			std::cin >> sinCoef >> cosCoef; 
 			P.addTerm(trigonometricMonom(std::complex<float>(cosCoef / 2, -sinCoef / 2), phase(fundamOmega / i, fundamK / i)));
-			P.addTerm(trigonometricMonom(std::complex<float>(cosCoef / 2, sinCoef / 2), -phase(fundamOmega / i, fundamK / i)));
+			P.addTerm(trigonometricMonom(std::complex<float>(cosCoef / 2, sinCoef / 2), phase(-fundamOmega / i, fundamK / i)));
 		}
 		for (float t = 0; t < tmax; t += tstep)
 		{
@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
 			{
 				cout << l << '\t' << P.calculate(t, l).real() << '\t' << P.calculate(t, l).imag() << '\n';
 			}
-			cout << '\n';
+			cout << "\n\n";
 		}
 		return 0;
 	}
