@@ -17,4 +17,5 @@ then
 	cd gnuplot
 	gnuplot analytical_animator.gp
 	gifsicle -i analytical_animation.gif -O3 -o analytical_optim.gif
+	eog analytical_optim.gif
 fi

@@ -52,8 +52,8 @@ int main(int argc, char* argv[])
 		std::cout << "Quantity of mode of oscillation: ";
 		std::cin >> m;
 
-		float fundamOmega = 4 * pi * soundVelocity / length;
-		float fundamK = 4 * pi / length;
+		float fundamOmega = pi * soundVelocity / length;
+		float fundamK = pi / length;
 
 		trigonometricPolynomial P;
 		float cosCoef, sinCoef;	
@@ -61,8 +61,8 @@ int main(int argc, char* argv[])
 		for (int i = 1; i <= m; i++)
 		{
 			std::cin >> sinCoef >> cosCoef; 
-			P.addTerm(trigonometricMonom(std::complex<float>(-cosCoef / 2, sinCoef / 2), phase(fundamOmega / i, fundamK / i)));
-			P.addTerm(trigonometricMonom(std::complex<float>(cosCoef / 2, sinCoef / 2), phase(-fundamOmega / i, fundamK / i)));
+			P.addTerm(trigonometricMonom(std::complex<float>(-cosCoef / 2, sinCoef / 2), phase(fundamOmega * i, fundamK * i)));
+			P.addTerm(trigonometricMonom(std::complex<float>(cosCoef / 2, sinCoef / 2), phase(-fundamOmega * i, fundamK * i)));
 		}
 		for (float t = 0; t < tmax; t += tstep)
 		{
