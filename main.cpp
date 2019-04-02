@@ -9,6 +9,8 @@
 #include "trigonometricMonom.h"
 #include "trigonometricPolynomial.h"
 
+std::vector<std::complex<float>> fourierTransform(std::vector<std::complex<float>> &);
+
 namespace po = boost::program_options;
 
 const float pi = 3.1415926;
@@ -102,4 +104,38 @@ int main(int argc, char* argv[])
 		}
 	}
 	return 0;
+}
+
+/*int main()
+{
+	int n;
+	std::cin >> n;
+	vector<complex<float>> in, out;
+	for (int i = 0; i < n; i++)
+	{
+		float tmp;
+		std::cin >> tmp;
+		in.push_back(complex<float>(tmp, 0));
+	}
+	out = fourierTransform(in);
+	for (int i = 0; i < out.size(); i++)
+	{
+		cout << i << '\t' << abs(out[i]) << '\t' << arg(out[i]) << '\n';
+	}
+	return 0;
+}*/
+std::vector<std::complex<float>> fourierTransform(std::vector<std::complex<float>> &in)
+{
+	std::vector<std::complex<float>> out;
+	complex<float> powerCoef(0, -2 * pi / in.size());
+	for (int j = 0; j < in.size(); j++)
+	{
+		out.push_back(std::complex<float>(0,0));
+		for (int n = 0; n < in.size(); n++)
+		{
+			out.back() += in[n] * exp(powerCoef * complex<float>((j * n), 0));
+		}
+		out.back() /= in.size();
+	}
+	return out;
 }
