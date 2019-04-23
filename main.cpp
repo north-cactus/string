@@ -58,13 +58,31 @@ int main(int argc, char* argv[])
 		float fundamK = pi / length;
 
 		trigonometricPolynomial P;
-		float cosCoef, sinCoef;	
 
+		std::vector<float> stringInitalCoordinates, cosCoef, sinCoef;
+
+		for (int i = 0; i < m; i++)
+		{
+			float tmp;
+			std::cin >> tmp;
+			stringInitalCoordinates.push_back(tmp);
+		}
+		//Fourier transform
+		for (int i = 0; i < m; i++)
+		{
+			cosCoef.push_back(0);
+			sinCoef.push_back(0);
+			for (int j = 0; j < m; j++)
+			{
+				cosCoef.back() += stringInitalCoordinates[j] * cos ( fundamK * i * length * j / ((float) m));
+				sinCoef.back() += stringInitalCoordinates[j] * sin ( fundamK * i * length * j / ((float) m));
+			}
+			//std::cerr << cosCoef[i] << '\t' << sinCoef[i] << '\n';
+		}
 		for (int i = 1; i <= m; i++)
 		{
-			std::cin >> sinCoef >> cosCoef; 
-			P.addTerm(trigonometricMonom(std::complex<float>(-cosCoef / 2, sinCoef / 2), phase(fundamOmega * i, fundamK * i)));
-			P.addTerm(trigonometricMonom(std::complex<float>(cosCoef / 2, sinCoef / 2), phase(-fundamOmega * i, fundamK * i)));
+			P.addTerm(trigonometricMonom(std::complex<float>(-cosCoef[i] / 2, sinCoef[i] / 2), phase(fundamOmega * i, fundamK * i)));
+			P.addTerm(trigonometricMonom(std::complex<float>(cosCoef[i] / 2, sinCoef[i] / 2), phase(-fundamOmega * i, fundamK * i)));
 		}
 		for (float t = 0; t < tmax; t += tstep)
 		{
