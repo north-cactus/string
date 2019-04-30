@@ -7,7 +7,7 @@
 class oneDimensionalString : public trigonometricPolynomial
 {
 	public:
-		void playToWav (std::string outputFileName, float time_s);
+		int playToWav (std::string outputFileName, float soundRecieiverCoordinate, float time_s);
 
 	protected:
 

@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
 	("help,h", "Show this help")
 	("out,o", po::value<std::string>(), "Output file option. It requires one argument.")
 	("analytical-solution,a", "Amplitudes of natural frequencies will be calculated by initial state of string.\n Result will be calculated with analytical solution.")
-	("wav,w", "Play sound of string to Wav-file. If this option is chosen, program will use analytical solution.")
+	("wav,w", "Play sound of string to Wav-file. This option work only with analytical solution. If option analytical-solution is not enabled, the option wav will be ignored.")
 	;
 	po::variables_map vm;
 	try
@@ -51,9 +51,9 @@ int main(int argc, char* argv[])
 	{
 		int m; 
 		float length, tmax, lstep, tstep, soundVelocity;
-		std::cout << "length, tmax, lstep, tstep, soundVelocity: ";
+		//std::cout << "length, tmax, lstep, tstep, soundVelocity: ";
 		std::cin >> length >> tmax >> lstep >> tstep >> soundVelocity;
-		std::cout << "Quantity of mode of oscillation: ";
+		//std::cout << "Quantity of mode of oscillation: ";
 		std::cin >> m;
 
 		float fundamOmega = pi * soundVelocity / length;
@@ -88,15 +88,18 @@ int main(int argc, char* argv[])
 		}
 		if (vm.count("wav"))
 		{
-			P.playToWav("test.wav", 10);
+			P.playToWav("test.wav", length / 2, 10);
 		}
-		for (float t = 0; t < tmax; t += tstep)
+		else
 		{
-			for (float l = 0; l < length; l += lstep) 
+			for (float t = 0; t < tmax; t += tstep)
 			{
-				cout << l << '\t' << P.calculate(t, l).real() << '\t' << P.calculate(t, l).imag() << '\n';
+				for (float l = 0; l < length; l += lstep) 
+				{
+					cout << l << '\t' << P.calculate(t, l).real() << '\t' << P.calculate(t, l).imag() << '\n';
+				}
+				cout << "\n\n";
 			}
-			cout << "\n\n";
 		}
 		return 0;
 	}
