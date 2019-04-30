@@ -8,6 +8,7 @@
 #include "phase.h"
 #include "trigonometricMonom.h"
 #include "trigonometricPolynomial.h"
+#include "oneDimensionalString.h"
 
 std::vector<std::complex<float>> fourierTransform(std::vector<std::complex<float>> &);
 
@@ -22,6 +23,7 @@ int main(int argc, char* argv[])
 	("help,h", "Show this help")
 	("out,o", po::value<std::string>(), "Output file option. It requires one argument.")
 	("analytical-solution,a", "Amplitudes of natural frequencies will be calculated by initial state of string.\n Result will be calculated with analytical solution.")
+	("wav,w", "Play sound of string to Wav-file. If this option is chosen, program will use analytical solution.")
 	;
 	po::variables_map vm;
 	try
@@ -57,7 +59,7 @@ int main(int argc, char* argv[])
 		float fundamOmega = pi * soundVelocity / length;
 		float fundamK = pi / length;
 
-		trigonometricPolynomial P;
+		oneDimensionalString P;
 
 		std::vector<float> stringInitalCoordinates, cosCoef, sinCoef;
 
@@ -83,6 +85,10 @@ int main(int argc, char* argv[])
 		{
 			P.addTerm(trigonometricMonom(std::complex<float>(-cosCoef[i] / 2, sinCoef[i] / 2), phase(fundamOmega * i, fundamK * i)));
 			P.addTerm(trigonometricMonom(std::complex<float>(cosCoef[i] / 2, sinCoef[i] / 2), phase(-fundamOmega * i, fundamK * i)));
+		}
+		if (vm.count("wav"))
+		{
+			P.playToWav("test.wav", 10);
 		}
 		for (float t = 0; t < tmax; t += tstep)
 		{
@@ -142,7 +148,7 @@ int main(int argc, char* argv[])
 	}
 	return 0;
 }*/
-std::vector<std::complex<float>> fourierTransform(std::vector<std::complex<float>> &in)
+/*std::vector<std::complex<float>> fourierTransform(std::vector<std::complex<float>> &in)
 {
 	std::vector<std::complex<float>> out;
 	complex<float> powerCoef(0, -2 * pi / in.size());
@@ -156,4 +162,4 @@ std::vector<std::complex<float>> fourierTransform(std::vector<std::complex<float
 		out.back() /= in.size();
 	}
 	return out;
-}
+}*/
