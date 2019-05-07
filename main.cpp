@@ -23,7 +23,8 @@ int main(int argc, char* argv[])
 	("help,h", "Show this help")
 	("analytical-solution,a", "Amplitudes of natural frequencies will be calculated by initial state of string.\n Result will be calculated with analytical solution.")
 	("wav,w", "Play sound of string to Wav-file. This option work only with analytical solution. If option analytical-solution is not enabled, the option wav will be ignored.")
-	("out,o", po::value<std::string>(), "Output file option. This option work only with wav option. If wav option is not enabled, the option out will be ignored.")
+	("out,o", po::value<std::string>(), "Output file option. Default name of output file is \"string_sound.wav\". This option work only with wav option. If wav option is not enabled, the option out will be ignored.")
+	("pickup-position,p", po::value<float>(), "Position of pickup in fractions of string length. This option work only with wav option. If wav option is not enabled, the option pickup-position will be ignored.")
 	;
 	po::variables_map vm;
 	try
@@ -84,11 +85,16 @@ int main(int argc, char* argv[])
 		if (vm.count("wav"))
 		{
 			std::string outputFileName = "string_sound.wav";
+			float pickup = 0.5;
 			if (vm.count("out"))
 			{
 				outputFileName = vm["out"].as<std::string>();
 			}
-			P.playToWav(outputFileName, length / 2, 10);
+			if (vm.count("pickup-position"))
+			{
+				pickup = vm["pickup-position"].as<float>();
+			}
+			P.playToWav(outputFileName, length * pickup, 10);
 		}
 		else
 		{
