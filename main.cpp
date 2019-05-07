@@ -21,9 +21,9 @@ int main(int argc, char* argv[])
 	po::options_description desc("Short description of options");
 	desc.add_options()
 	("help,h", "Show this help")
-	("out,o", po::value<std::string>(), "Output file option. It requires one argument.")
 	("analytical-solution,a", "Amplitudes of natural frequencies will be calculated by initial state of string.\n Result will be calculated with analytical solution.")
 	("wav,w", "Play sound of string to Wav-file. This option work only with analytical solution. If option analytical-solution is not enabled, the option wav will be ignored.")
+	("out,o", po::value<std::string>(), "Output file option. This option work only with wav option. If wav option is not enabled, the option out will be ignored.")
 	;
 	po::variables_map vm;
 	try
@@ -42,11 +42,7 @@ int main(int argc, char* argv[])
 		std::cout << desc << std::endl;
 		return 1;
 	}
-	if (vm.count("out"))
-	{
-		std::cout << "Sorry, file output have not realized.\n";
-		return 1;
-	}
+	
 	if (vm.count("analytical-solution"))
 	{
 		int m; 
@@ -79,7 +75,6 @@ int main(int argc, char* argv[])
 				cosCoef.back() += stringInitalCoordinates[j] * cos ( fundamK * i * length * j / ((float) m));
 				sinCoef.back() += stringInitalCoordinates[j] * sin ( fundamK * i * length * j / ((float) m));
 			}
-			//std::cerr << cosCoef[i] << '\t' << sinCoef[i] << '\n';
 		}
 		for (int i = 1; i <= m; i++)
 		{
@@ -88,7 +83,12 @@ int main(int argc, char* argv[])
 		}
 		if (vm.count("wav"))
 		{
-			P.playToWav("test.wav", length / 2, 10);
+			std::string outputFileName = "string_sound.wav";
+			if (vm.count("out"))
+			{
+				outputFileName = vm["out"].as<std::string>();
+			}
+			P.playToWav(outputFileName, length / 2, 10);
 		}
 		else
 		{

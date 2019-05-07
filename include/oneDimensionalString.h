@@ -8,6 +8,8 @@ class oneDimensionalString : public trigonometricPolynomial
 {
 	public:
 		int playToWav (std::string outputFileName, float soundRecieiverCoordinate, float time_s);
+		oneDimensionalString();
+		~oneDimensionalString();
 
 	protected:
 

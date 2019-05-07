@@ -8,6 +8,15 @@
 //sizeof(WORD) = 16 bits = 2 bytes
 //sizeof(DWORD) = 32 bits = 4 bytes
 
+oneDimensionalString::oneDimensionalString()
+{
+	//ctor;
+}
+oneDimensionalString::~oneDimensionalString()
+{
+	//dtor;
+}
+
 //The base of the code have been copied from http://www.cyberforum.ru/cpp-beginners/thread1703666.html#post8983232
  
 struct wav_header_t
